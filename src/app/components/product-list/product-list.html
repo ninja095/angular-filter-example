@@ -1,0 +1,58 @@
+<div class="container">
+  <h2>🛍️ Angular 20+ Product Catalog</h2>
+  <div class="filter-controls">
+    <h3>Category</h3>
+    <div class="filter-buttons">
+      @for (category of categories; track category) {
+        <button
+          (click)="onCategorySelect(category)"
+          [class.active]="category === currentFilters().category"
+        >{{ category }}</button>
+      }
+    </div>
+
+    <h3>Price Range (USD)</h3>
+    <div class="price-inputs">
+      <label>Min: <input type="number" [(ngModel)]="minPrice" min="0"></label>
+      <label>Max: <input type="number" [(ngModel)]="maxPrice" max="300"></label>
+      <button (click)="onPriceRangeChange()">Apply Price</button>
+    </div>
+
+    <h3>Color</h3>
+    <div class="color-checkboxes">
+      @for (color of availableColors(); track color) {
+        <label>
+          <input
+            type="checkbox"
+            [checked]="currentFilters().color.includes(color)"
+            (change)="onColorToggle(color)"
+          >
+          {{ color }}
+        </label>
+      }
+    </div>
+    <button (click)="resetFilters()" class="reset-button">Reset All Filters</button>
+  </div>
+
+  <hr>
+
+  @if (isLoading()) {
+    <div class="loading-indicator">
+      <p>Loading products from stream... Please wait (1s delay simulation).</p>
+    </div>
+  } @else {
+    <div class="product-grid">
+      @for (product of products(); track product.id) {
+        <div class="product-card">
+          <h3>{{ product.name }}</h3>
+          <p>Category: <strong>{{ product.category }}</strong></p>
+          <span class="price">{{ product.price | currency:'USD' }}</span>
+        </div>
+      } @empty {
+        <div class="no-results">
+          No products found matching the current filters.
+        </div>
+      }
+    </div>
+  }
+</div>

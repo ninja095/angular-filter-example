@@ -1,0 +1,151 @@
+/* src/app/product-list.component.css */
+
+.container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 30px;
+  background-color: #f4f4f9;
+}
+
+h2 {
+  color: #1e3a8a;
+  border-bottom: 2px solid #e0e7ff;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+/* --- Секция управления фильтрами --- */
+
+.filter-controls {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.filter-controls h3 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 5px;
+}
+
+.filter-buttons {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-buttons button,
+.price-inputs button,
+.reset-button {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  font-weight: 600;
+}
+
+/* Кнопка активной категории */
+.filter-buttons button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  transform: translateY(-1px);
+}
+.filter-buttons button:hover:not(.active) {
+  background-color: #e9e9e9;
+}
+
+/* --- Ввод цен --- */
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.price-inputs label {
+  font-weight: 500;
+  color: #555;
+}
+
+.price-inputs input[type="number"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 80px;
+  margin-left: 5px;
+}
+
+.price-inputs button {
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+.price-inputs button:hover {
+  background-color: #218838;
+}
+
+.reset-button {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+  margin-top: 15px;
+  width: auto;
+}
+.reset-button:hover {
+  background-color: #c82333;
+}
+
+
+/* --- Секция списка товаров --- */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+.product-card {
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  transition: transform 0.2s;
+}
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-card h3 {
+  margin-top: 0;
+  color: #007bff;
+  font-size: 1.25em;
+}
+
+.price {
+  font-weight: 700;
+  color: #28a745;
+  font-size: 1.3em;
+  display: block;
+  margin-top: 10px;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  color: #856404;
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  font-size: 1.1em;
+}
