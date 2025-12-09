@@ -5,6 +5,7 @@ export type Product = {
   name: string;
   price: number;
   color: string[];
+  size: string[];
   category: ProductCategory;
 };
 
@@ -17,5 +18,5 @@ export interface ProductFilters {
     max: number;
   };
   color: string[];
-  // Здесь можно добавить другие фильтры, например, color: string;
+  size: string[];
 }

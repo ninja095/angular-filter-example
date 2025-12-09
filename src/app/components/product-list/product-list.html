@@ -31,6 +31,20 @@
         </label>
       }
     </div>
+
+    <h3>Size</h3>
+    <div class="size-checkboxes">
+      @for (size of availableSizes(); track size) {
+        <label>
+          <input
+            type="checkbox"
+            [checked]="currentFilters().size.includes(size)"
+            (change)="onSizeToggle(size)"
+          >
+          {{ size }}
+        </label>
+      }
+    </div>
     <button (click)="resetFilters()" class="reset-button">Reset All Filters</button>
   </div>
 

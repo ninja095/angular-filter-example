@@ -21,6 +21,7 @@ export class ProductList {
   protected isLoading = this.productService.isLoading;
   protected currentFilters = this.productService.filters;
   protected availableColors = this.productService.availableColors;
+  protected availableSizes = this.productService.availableSizes;
 
   protected categories = ['All', 'Shirts', 'Pants', 'Jackets'] as const;
   protected minPrice = signal(this.currentFilters().priceRange.min);
@@ -36,6 +37,9 @@ export class ProductList {
 
   protected onColorToggle(color: string) {
     this.productService.setColor(color);
+  }
+  protected onSizeToggle(size: string) {
+    this.productService.setSize(size);
   }
 
   protected resetFilters() {

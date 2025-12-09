@@ -17,7 +17,8 @@ export class ProductService {
   readonly filters = signal<ProductFilters>({
     category: 'All',
     priceRange: { min: 0, max: 1000 },
-    color: []
+    color: [],
+    size: []
   });
 
   readonly filteredProducts = computed<Product[]>(() => {
@@ -41,6 +42,13 @@ export class ProductService {
         product.color.some(color => activeColors.includes(color))
       );
     }
+    // Фильтрация по размеру
+    const activeSizes = currentFilters.size;
+    if (activeSizes.length > 0) {
+      result = result.filter(product =>
+        product.size.some(size => activeSizes.includes(size))
+      );
+    }
     return result;
   });
 
@@ -51,6 +59,13 @@ export class ProductService {
     if (products.length === 0) return [];
     const allColors = products.flatMap(p => p.color);
     return Array.from(new Set(allColors)).sort();
+  });
+
+  readonly availableSizes = computed<string[]>(() => {
+    const products = this.allProducts();
+    if (products.length === 0) return [];
+    const allSizes = products.flatMap(p => p.size);
+    return Array.from(new Set(allSizes)).sort();
   });
 
   setCategoryFilter(category: FilterCategory) {
@@ -67,6 +82,15 @@ export class ProductService {
         ? f.color.filter(c => c !== color)
         : [...f.color, color];
       return { ...f, color: colors };
+    });
+  }
+
+  setSize(size: string) {
+    this.filters.update(f => {
+      const sizes = f.size.includes(size)
+        ? f.size.filter(s => s !== size)
+        : [...f.size, size];
+      return { ...f, size: sizes };
     });
   }
 }
