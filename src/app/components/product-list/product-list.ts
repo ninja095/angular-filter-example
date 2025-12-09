@@ -43,14 +43,7 @@ export class ProductList {
   }
 
   protected resetFilters() {
-    this.productService.setCategoryFilter('All');
-    this.productService.setPriceRange(0, 300);
-    this.productService.filters.update(f => ({
-      ...f,
-      category: 'All',
-      priceRange: { min: 0, max: 300 },
-      color: []
-    }));
+    this.productService.resetAllFilters();
     this.minPrice.set(0);
     this.maxPrice.set(300);
   }

@@ -9,17 +9,19 @@ import {ProductFilters, Product, FilterCategory} from '../models/product.types';
 export class ProductService {
   private dataStream = inject(DataStream);
 
+  private readonly INITIAL_FILTERS: ProductFilters = {
+    category: 'All',
+    priceRange: { min: 0, max: 1000 },
+    color: [],
+    size: []
+  };
+
   private allProducts = toSignal(
     this.dataStream.getProductsStream(),
     { initialValue: [] }
   );
 
-  readonly filters = signal<ProductFilters>({
-    category: 'All',
-    priceRange: { min: 0, max: 1000 },
-    color: [],
-    size: []
-  });
+  readonly filters = signal<ProductFilters>(this.INITIAL_FILTERS);
 
   readonly filteredProducts = computed<Product[]>(() => {
     const allProducts = this.allProducts();
@@ -92,5 +94,9 @@ export class ProductService {
         : [...f.size, size];
       return { ...f, size: sizes };
     });
+  }
+
+  resetAllFilters() {
+    this.filters.set(this.INITIAL_FILTERS);
   }
 }
